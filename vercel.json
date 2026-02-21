@@ -2,8 +2,14 @@
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
   "framework": null,
+  "functions": {
+    "api/index.py": {
+      "includeFiles": "backend/**"
+    }
+  },
   "rewrites": [
     { "source": "/predict/:path*", "destination": "/api/index" },
-    { "source": "/recommend", "destination": "/api/index" }
+    { "source": "/recommend", "destination": "/api/index" },
+    { "source": "/(?!predict|recommend)(.*)", "destination": "/index.html" }
   ]
 }
