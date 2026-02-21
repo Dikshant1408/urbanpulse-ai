@@ -126,6 +126,26 @@ The dashboard will be available at `http://localhost:5173`.
 
 ---
 
+## Deploying to Vercel
+
+The project includes a `vercel.json` that configures everything for a one-click Vercel deployment:
+
+- The **frontend** (React/Vite) is built with `cd frontend && npm install && npm run build` and served from `frontend/dist`.
+- The **backend** (FastAPI) is exposed as a Vercel Python serverless function in `api/index.py` using [Mangum](https://github.com/jordaneremieff/mangum) as the ASGI adapter.
+- URL rewrites route `/predict/*` and `/recommend` to the serverless function automatically.
+
+```bash
+# One-time setup
+npm i -g vercel
+
+# Deploy
+vercel --prod
+```
+
+> **Note:** On a cold start, Vercel's serverless function loads the ML models from the bundled CSV files and caches them for subsequent warm invocations.
+
+---
+
 ## GitHub Push Instructions
 
 ```bash
